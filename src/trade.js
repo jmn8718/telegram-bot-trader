@@ -1,5 +1,5 @@
 const get = require('lodash.get')
-const { getExchange, getSymbols } = require('./exchange')
+const { getExchange, getTickers } = require('./exchange')
 
 const registerTradeCommands = function (bot) {
   const tradeList = async function (msg, match) {
@@ -16,19 +16,38 @@ const registerTradeCommands = function (bot) {
 
   bot.onText(/\/trade list (.+)/, tradeList)
 
-  const fetchTicker = async function (msg, match) {
+  const handleTickers = async function (msg, match) {
+    console.log(match)
     const pair = match[1].toUpperCase().trim()
     console.log(pair)
-    const kraken = await getExchange('kraken')
-    const ticker = await kraken.fetch_ticker(pair)
-    console.log(ticker)
+    const tickers = await getTickers(pair)
+    console.log(tickers)
     bot.sendMessage(
       get(msg, 'chat.id'),
-      get(ticker, 'last', get(ticker, 'close', '-'))
+      tickers
+        .map(({ exchange, ticker }) => `_${exchange}_: __${ticker}__`)
+        .join('\n')
     )
   }
 
-  bot.onText(/\/ticker (.+)/, fetchTicker)
+  bot.onText(/\/tickers (.+)/, handleTickers)
+
+  const handleTicker = async function (msg, match) {
+    console.log(match)
+    const exchangeId = match[1].toUpperCase().trim()
+    const pair = match[2].toUpperCase().trim()
+    console.log(pair, exchangeId)
+    const tickers = await getTickers(pair, exchangeId)
+    console.log(tickers)
+    bot.sendMessage(
+      get(msg, 'chat.id'),
+      tickers
+        .map(({ exchange, ticker }) => `_${exchange}_: __${ticker}__`)
+        .join('\n')
+    )
+  }
+
+  bot.onText(/\/ticker (.+) (.+)/, handleTicker)
 }
 
 module.exports = {
