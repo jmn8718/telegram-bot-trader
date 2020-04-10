@@ -9,12 +9,19 @@
     "lint": "eslint src",
     "start": "nodemon src/index.js"
   },
-  "keywords": ["node", "telegram", "bot"],
+  "keywords": [
+    "node",
+    "telegram",
+    "bot",
+    "ccxt"
+  ],
   "author": "Jose Navarro <jmn8718@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "ccxt": "^1.25.95",
     "dotenv": "^8.2.0",
     "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2",
     "node-telegram-bot-api": "^0.40.0"
   },
   "devDependencies": {

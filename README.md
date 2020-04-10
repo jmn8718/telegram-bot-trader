@@ -8,4 +8,6 @@ Telegram bot for handle crypto trading actions
 
 ## References
 
+- [ccxt](https://github.com/ccxt/ccxt)
+- [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api)
 - [Telegram bot documentation](https://core.telegram.org/bots)

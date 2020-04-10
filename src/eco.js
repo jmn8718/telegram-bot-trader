@@ -7,6 +7,7 @@ const registerEcoCommands = function (bot) {
   const handleEcho = (msg, match) => {
     bot.sendMessage(get(msg, 'chat.id'), match[1])
   }
+
   bot.onText(/\/echo (.+)/, handleEcho)
 }
 
