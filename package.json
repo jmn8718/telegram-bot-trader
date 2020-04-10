@@ -1,0 +1,27 @@
+{
+  "name": "telegram-bot-trader",
+  "version": "0.0.1",
+  "description": "Telegram bot for handle crypto trading actions",
+  "main": "src/index.js",
+  "scripts": {
+    "prettier": "prettier --write src",
+    "prelint": "npm run prettier",
+    "lint": "eslint src",
+    "start": "nodemon src/index.js"
+  },
+  "keywords": ["node", "telegram", "bot"],
+  "author": "Jose Navarro <jmn8718@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "lodash.get": "^4.4.2",
+    "node-telegram-bot-api": "^0.40.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.4"
+  }
+}
