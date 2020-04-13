@@ -1,6 +1,7 @@
 const get = require('lodash.get')
-const { getExchange, getTickers } = require('./exchange')
+const { getExchange, getTickers } = require('../crypto')
 
+const formatTicker = ({ exchange, ticker }) => `*${exchange}*: _${ticker}_`
 const registerTradeCommands = function (bot) {
   const tradeList = async function (msg, match) {
     const market = match[1].toUpperCase().trim()
@@ -22,12 +23,9 @@ const registerTradeCommands = function (bot) {
     console.log(pair)
     const tickers = await getTickers(pair)
     console.log(tickers)
-    bot.sendMessage(
-      get(msg, 'chat.id'),
-      tickers
-        .map(({ exchange, ticker }) => `_${exchange}_: __${ticker}__`)
-        .join('\n')
-    )
+    bot.sendMessage(get(msg, 'chat.id'), tickers.map(formatTicker).join('\n'), {
+      parse_mode: 'Markdown',
+    })
   }
 
   bot.onText(/\/tickers (.+)/, handleTickers)
@@ -39,12 +37,9 @@ const registerTradeCommands = function (bot) {
     console.log(pair, exchangeId)
     const tickers = await getTickers(pair, exchangeId)
     console.log(tickers)
-    bot.sendMessage(
-      get(msg, 'chat.id'),
-      tickers
-        .map(({ exchange, ticker }) => `_${exchange}_: __${ticker}__`)
-        .join('\n')
-    )
+    bot.sendMessage(get(msg, 'chat.id'), tickers.map(formatTicker).join('\n'), {
+      parse_mode: 'Markdown',
+    })
   }
 
   bot.onText(/\/ticker (.+) (.+)/, handleTicker)
