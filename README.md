@@ -65,3 +65,10 @@ Run `npm run serve` to start the built project.
   Registed notification for ETH/EUR on kraken
   Current ticker is 140.31
   ```
+
+- `/unregister (exchange) (pair)`. Register to get notification of prices updates.
+  Example: `/unregister kraken eth/eur`
+  Response:
+  ```
+  Unregisted notification for ETH/EUR on coinbasepro
+  ```
