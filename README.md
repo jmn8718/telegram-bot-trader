@@ -25,3 +25,35 @@ Run `npm run serve` to start the built project.
 - [ccxt](https://github.com/ccxt/ccxt)
 - [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api)
 - [Telegram bot documentation](https://core.telegram.org/bots)
+
+## Bot commands
+
+- `/echo xxx`, reply to the user whatever they send to the bot.
+  Example: `/echo hello there`
+  Response: `hello there`
+
+- `/ticket (exchange) (pair)`. Ask for the ticker price of the expecified exchange.
+  Example: `/ticker kraken btc/eur`
+  Response: 
+  ```
+  kraken: 6166.3
+  ```
+
+- `/tickers (pair)`. Ask for the ticker prices of the registered exchanges on the bot
+  Example: `/tickers eth/eur`
+  Response:
+  ```
+  COINBASEPRO: 140.74
+  KRAKEN: 140.88
+  ```
+
+- `/trade list (exchange) (currency)`. Ask for the ticker prices of the registered exchanges on the bot
+  Example: `/trade list kraken eth`
+  Response:
+  ```
+  ADA/ETH
+  ALGO/ETH
+  ATOM/ETH
+  BAT/ETH
+  ...
+  ```
