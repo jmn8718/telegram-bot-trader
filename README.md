@@ -72,3 +72,7 @@ Run `npm run serve` to start the built project.
   ```
   Unregisted notification for ETH/EUR on coinbasepro
   ```
+
+## Live notifications
+
+User's can register to recibe price updates using the command `/register ...`, the bot sends notifications on every hour, it uses a cron scheduler to notify the users. 

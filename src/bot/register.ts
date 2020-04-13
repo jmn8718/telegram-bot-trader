@@ -1,8 +1,9 @@
 import get from 'lodash.get';
 import set from 'lodash.set';
 import TelegramBot from 'node-telegram-bot-api';
+import { CronJob } from 'cron';
 
-import { getTickers, Ticker } from '../exchanges';
+import { getTickers, Ticker, formatTicker } from '../exchanges';
 
 const MESSAGE_OPTIONS: TelegramBot.SendMessageOptions = {
   parse_mode: 'Markdown', // eslint-disable-line
@@ -48,7 +49,44 @@ const unregisterPairToUser = (
   if (indexOfPair > -1) {
     pairs.splice(indexOfPair, 1);
   }
-  set(registeredUsers, userId, [...pairs]);
+};
+
+const notifyUser = async function (
+  bot: TelegramBot,
+  userId: string
+): Promise<void> {
+  const userSubscriptions: UserUpdateInformation[] = get(
+    registeredUsers,
+    userId,
+    []
+  );
+  if (userSubscriptions.length > 0) {
+    const results: Ticker[] = await Promise.all(
+      userSubscriptions.map(
+        async (subscription: UserUpdateInformation): Promise<Ticker> => {
+          const currentTickers: Ticker[] = await getTickers(
+            subscription.pair,
+            subscription.exchangeId
+          );
+          return currentTickers[0];
+        }
+      )
+    );
+    const message = `_Subscriptions_\n${results.map(formatTicker).join('\n')}`;
+    bot.sendMessage(userId, message, MESSAGE_OPTIONS);
+  }
+};
+
+const initializeCron = function (bot: TelegramBot): void {
+  const job = new CronJob('0 0 */1 * * *', () => {
+    console.log('Cron job execution started');
+    Object.keys(registeredUsers).forEach((userId: string) => {
+      notifyUser(bot, userId);
+    });
+    console.log('Cron job execution done');
+  });
+  job.start();
+  console.log('Cron job started');
 };
 
 export const registerRegisterCommands = function (bot: TelegramBot): void {
@@ -92,4 +130,6 @@ export const registerRegisterCommands = function (bot: TelegramBot): void {
 
   bot.onText(/\/register (.+) (.+)/, handleRegister);
   bot.onText(/\/unregister (.+) (.+)/, handleUnRegister);
+
+  initializeCron(bot);
 };
