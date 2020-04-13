@@ -3,6 +3,7 @@ import get from 'lodash.get';
 
 import { registerTradeCommands } from './trade';
 import { registerEcoCommands } from './eco';
+import { registerRegisterCommands } from './register';
 
 import { CONFIG } from '../config';
 
@@ -11,6 +12,7 @@ export const initializeBot = function (): void {
 
   registerTradeCommands(bot);
   registerEcoCommands(bot);
+  registerRegisterCommands(bot);
 
   bot.on('message', (msg) => {
     const chatId = get(msg, 'chat.id');

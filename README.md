@@ -57,3 +57,11 @@ Run `npm run serve` to start the built project.
   BAT/ETH
   ...
   ```
+
+- `/register (exchange) (pair)`. Register to get notification of prices updates.
+  Example: `/register kraken eth/eur`
+  Response:
+  ```
+  Registed notification for ETH/EUR on kraken
+  Current ticker is 140.31
+  ```
