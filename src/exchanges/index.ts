@@ -27,7 +27,7 @@ export const getExchangeTicker = async function (
   pair: string
 ): Promise<number> {
   const exchange: Exchange = await getExchange(exchangeId);
-  const ticker: ccxt.Ticker = await exchange.fetchTicker(pair);
+  const ticker: ccxt.Ticker = await exchange.fetchTicker(pair.toUpperCase());
   return get(ticker, 'last', get(ticker, 'close', 0));
 };
 
