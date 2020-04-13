@@ -48,6 +48,8 @@ export const getTickers = async function (
 export const initializeExchange = async function (
   exchangeId: string
 ): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   const exchange: Exchange = new ccxt[exchangeId]();
   await exchange.loadMarkets();
   set(exchanges, exchangeId.toUpperCase(), exchange);
