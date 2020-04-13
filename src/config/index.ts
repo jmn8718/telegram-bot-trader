@@ -1,9 +1,9 @@
-import get from "lodash.get";
+import get from 'lodash.get';
 
-interface IConfig {
+interface Config {
   BOT_TOKEN: string;
 }
 
-export const CONFIG: IConfig = {
-  BOT_TOKEN: get(process.env, "TELEGRAM_BOT_TOKEN", ""),
+export const CONFIG: Config = {
+  BOT_TOKEN: get(process.env, 'TELEGRAM_BOT_TOKEN', ''),
 };

@@ -1,15 +1,12 @@
 {
+  "root": true,
+  "parser": "@typescript-eslint/parser",
   "plugins": [
-    "prettier"
+    "@typescript-eslint"
   ],
   "extends": [
-    "plugin:prettier/recommended"
-  ],
-  "env": {
-    "es6": true,
-    "node": true
-  },
-  "rules": {
-    "prettier/prettier": "error"
-  }
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ]
 }

@@ -1,9 +1,9 @@
-require("dotenv").config();
+require('dotenv').config();
 
-import { initializeBot } from "./bot";
+import { initializeBot } from './bot';
 
-import { initializeExchange } from "./exchanges";
+import { initializeExchange } from './exchanges';
 
 initializeBot();
-initializeExchange("kraken");
-initializeExchange("coinbasepro");
+initializeExchange('kraken');
+initializeExchange('coinbasepro');
