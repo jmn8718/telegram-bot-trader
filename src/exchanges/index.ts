@@ -6,7 +6,7 @@ export interface Ticker {
   exchange: string;
   ticker: number;
 }
-export type Exchange = ccxt.Exchange
+export type Exchange = ccxt.Exchange;
 
 interface Exchanges<T> {
   [key: string]: T;

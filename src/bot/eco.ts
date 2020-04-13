@@ -12,7 +12,3 @@ export const registerEcoCommands = function (bot: TelegramBot): void {
 
   bot.onText(/\/echo (.+)/, handleEcho);
 };
-
-module.exports = {
-  registerEcoCommands,
-};

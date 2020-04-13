@@ -6,7 +6,7 @@ import { registerEcoCommands } from './eco';
 
 import { CONFIG } from '../config';
 
-const initializeBot = function (): void {
+export const initializeBot = function (): void {
   const bot = new telegramBot(CONFIG.BOT_TOKEN, { polling: true });
 
   registerTradeCommands(bot);
@@ -27,8 +27,4 @@ const initializeBot = function (): void {
     }
     bot.sendMessage(chatId, 'Received your message');
   });
-};
-
-module.exports = {
-  initializeBot,
 };

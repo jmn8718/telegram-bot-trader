@@ -9,7 +9,7 @@ import {
   Exchange,
 } from '../exchanges';
 
-const registerTradeCommands = function (bot: TelegramBot): void {
+export const registerTradeCommands = function (bot: TelegramBot): void {
   const tradeList = async function (
     msg: TelegramBot.Message,
     match: RegExpExecArray | null
@@ -33,7 +33,7 @@ const registerTradeCommands = function (bot: TelegramBot): void {
     const pair: string = match ? match[1] : '';
     const tickers: Ticker[] = await getTickers(pair);
     bot.sendMessage(get(msg, 'chat.id'), tickers.map(formatTicker).join('\n'), {
-      parse_mode: 'Markdown', // eslint-disable-line 
+      parse_mode: 'Markdown', // eslint-disable-line
     });
   };
 
@@ -47,13 +47,9 @@ const registerTradeCommands = function (bot: TelegramBot): void {
     const pair: string = match ? match[2] : '';
     const tickers: Ticker[] = await getTickers(pair, exchangeId);
     bot.sendMessage(get(msg, 'chat.id'), tickers.map(formatTicker).join('\n'), {
-      parse_mode: 'Markdown', // eslint-disable-line 
+      parse_mode: 'Markdown', // eslint-disable-line
     });
   };
 
   bot.onText(/\/ticker (.+) (.+)/, handleTicker);
-};
-
-module.exports = {
-  registerTradeCommands,
 };
