@@ -11,9 +11,9 @@ Telegram bot for handle crypto trading actions, built with typescript.
 
 ### Development
 
-For development, this project uses `typescript` and `ts-node-dev` for reload of the file changes.
+For development, this project uses `typescript` and `nodemon` for reload of the file changes.
 
-Run `npm start` to run the project on development mode.
+Run `npm watch` to run the project on development mode.
 
 ## Build
 
@@ -23,6 +23,7 @@ Run `npm run serve` to start the built project.
 ## References
 
 - [ccxt](https://github.com/ccxt/ccxt)
+- [ccxws](https://github.com/altangent/ccxws)
 - [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api)
 - [Telegram bot documentation](https://core.telegram.org/bots)
 

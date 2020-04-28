@@ -5,12 +5,15 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
+    "start": "npm run serve",
+    "serve": "node dist/index.js",
     "prettier": "prettier --write src",
     "prelint": "npm run prettier",
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
-    "start": "ts-node-dev --respawn --transpileOnly src/index.ts",
-    "serve": "node dist/index.js"
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "watch-ts": "tsc -w",
+    "watch-node": "nodemon dist/index.js"
   },
   "keywords": [
     "node",
@@ -38,9 +41,19 @@
     "@types/node-telegram-bot-api": "^0.40.2",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
+    "concurrently": "^5.2.0",
     "eslint": "^6.8.0",
+    "nodemon": "^2.0.3",
     "prettier": "^2.0.4",
     "ts-node-dev": "^1.0.0-pre.44",
     "tslint-config-prettier": "^1.18.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmn8718/telegram-bot-trader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jmn8718/telegram-bot-trader/issues"
+  },
+  "homepage": "https://github.com/jmn8718/telegram-bot-trader#readme"
 }
