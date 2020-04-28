@@ -6,7 +6,7 @@ export const TRADE_EVENT_TYPES = {
 
 export const TradeEmitter = new EventEmitter();
 
-export enum TadeSide {
+export enum TradeSide {
   BUY = 'buy',
   SELL = 'sell',
 }
@@ -14,8 +14,9 @@ export enum TadeSide {
 export interface Trade {
   exchange: string;
   symbol: string;
-  last: number;
-  side: TadeSide;
+  price: string;
+  amount: string;
+  side: TradeSide;
   timestamp: number;
 }
 
@@ -43,8 +44,9 @@ export const simulateTrades = function (
       timestamp: Date.now(),
       exchange,
       symbol,
-      last: 120.0,
-      side: TadeSide.BUY,
+      price: '120.0',
+      amount: '0.01',
+      side: TradeSide.BUY,
     };
     publishTrade(trade);
   }, 2000);
