@@ -45,6 +45,14 @@ export const getTickers = async function (
   );
 };
 
+export const getMarket = async function (
+  exchangeId: string,
+  symbol: string
+): Promise<ccxt.Market> {
+  const exchange: Exchange = await getExchange(exchangeId);
+  return exchange.market(symbol.toUpperCase());
+};
+
 export const initializeExchange = async function (
   exchangeId: string
 ): Promise<void> {
