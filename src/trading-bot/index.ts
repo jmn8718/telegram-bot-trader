@@ -5,7 +5,7 @@ import {
   generateEventKey,
 } from '../events/trade';
 
-interface TradingBotParameters {
+export interface TradingBotParameters {
   exchange: string;
   symbol: string;
 }
@@ -26,11 +26,12 @@ export class TradingBot {
   }
 
   handleTrade(trade: Trade): void {
-    console.log('handleTrade', trade);
+    console.log(
+      `TRADE: ${trade.exchange} - ${trade.symbol}: ${trade.side} => ${trade.price} ${trade.amount}`
+    );
   }
 
   start(): void {
-    console.log(`start => ${this.eventKey}`);
     TradeEmitter.on(this.eventKey, this.handleTrade);
   }
 

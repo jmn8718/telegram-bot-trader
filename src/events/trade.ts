@@ -25,14 +25,16 @@ export const generateEventKey = function (
   exchange: string,
   symbol: string
 ): string {
-  return `${eventName}_${exchange}|${symbol}`;
+  return `${eventName.toUpperCase()}_${exchange.toUpperCase()}|${symbol.toUpperCase()}`;
 };
 
 export const publishTrade = function (trade: Trade): void {
-  TradeEmitter.emit(
-    generateEventKey(TRADE_EVENT_TYPES.TRADE, trade.exchange, trade.symbol),
-    trade
+  const eventKey: string = generateEventKey(
+    TRADE_EVENT_TYPES.TRADE,
+    trade.exchange,
+    trade.symbol
   );
+  TradeEmitter.emit(eventKey, trade);
 };
 
 export const simulateTrades = function (

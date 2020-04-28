@@ -22,7 +22,6 @@ export class LiveExchanges {
   markets: Markets = {};
 
   notify(exchangeTrade: ccxws.ExchangeTrade): void {
-    console.log(exchangeTrade);
     if (
       exchangeTrade.side !== TradeSide.BUY &&
       exchangeTrade.side !== TradeSide.SELL
@@ -31,7 +30,7 @@ export class LiveExchanges {
     }
     const trade: Trade = {
       exchange: exchangeTrade.exchange,
-      symbol: `${exchangeTrade.base}-${exchangeTrade.quote}`.toUpperCase(),
+      symbol: `${exchangeTrade.base}/${exchangeTrade.quote}`.toUpperCase(),
       side:
         exchangeTrade.side === TradeSide.BUY ? TradeSide.BUY : TradeSide.SELL,
       timestamp: exchangeTrade.unix,
