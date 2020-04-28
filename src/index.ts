@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-import { initializeBot } from './bot';
+import { initializeBot } from './telegram-bot';
 
 import { initializeExchange } from './exchanges';
 
