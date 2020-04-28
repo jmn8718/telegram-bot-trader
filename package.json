@@ -21,7 +21,7 @@
   "author": "Jose Navarro <jmn8718@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "ccxt": "^1.25.95",
+    "ccxt": "^1.27.5",
     "cron": "^1.8.2",
     "dotenv": "^8.2.0",
     "lodash.get": "^4.4.2",
@@ -30,6 +30,7 @@
     "typescript": "^3.8.3"
   },
   "devDependencies": {
+    "@types/cron": "^1.7.2",
     "@types/lodash.get": "^4.4.6",
     "@types/lodash.set": "^4.3.6",
     "@types/node": "^13.11.1",
