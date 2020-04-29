@@ -21,23 +21,25 @@ export class LiveExchanges {
   exchanges: Exchanges = {};
   markets: Markets = {};
 
-  notify(exchangeTrade: ccxws.ExchangeTrade): void {
-    if (
-      exchangeTrade.side !== TradeSide.BUY &&
-      exchangeTrade.side !== TradeSide.SELL
-    ) {
-      throw new Error(`Invalid side: ${exchangeTrade.side}`);
-    }
-    const trade: Trade = {
-      exchange: exchangeTrade.exchange,
-      symbol: `${exchangeTrade.base}/${exchangeTrade.quote}`.toUpperCase(),
-      side:
-        exchangeTrade.side === TradeSide.BUY ? TradeSide.BUY : TradeSide.SELL,
-      timestamp: exchangeTrade.unix,
-      price: exchangeTrade.price,
-      amount: exchangeTrade.amount,
+  notify(symbol: string): (exchangeTrade: ccxws.ExchangeTrade) => void {
+    return function (exchangeTrade: ccxws.ExchangeTrade): void {
+      const tradeSymbol = `${exchangeTrade.base}/${exchangeTrade.quote}`.toUpperCase();
+      // we have to filter as different trades trigger the notify
+      if (symbol === tradeSymbol) {
+        const trade: Trade = {
+          exchange: exchangeTrade.exchange,
+          symbol: tradeSymbol,
+          side:
+            exchangeTrade.side === TradeSide.BUY
+              ? TradeSide.BUY
+              : TradeSide.SELL,
+          timestamp: exchangeTrade.unix,
+          price: exchangeTrade.price,
+          amount: exchangeTrade.amount,
+        };
+        publishTrade(trade);
+      }
     };
-    publishTrade(trade);
   }
 
   register(market: Market): void {
@@ -59,7 +61,7 @@ export class LiveExchanges {
     const symbolKey = `${market.exchange}|${market.symbol}`;
     if (!this.markets[symbolKey]) {
       console.log(`REGISTER => ${symbolKey}`);
-      exchange.on('trade', this.notify);
+      exchange.on('trade', this.notify(market.symbol));
       const tradeMarket: ccxws.TradeMarket = {
         id: market.id,
         base: market.base,
