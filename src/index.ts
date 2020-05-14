@@ -7,7 +7,12 @@ import { PriceAlarmBot, PriceAlarmBotParameters } from './trading-bot';
 
 const liveExchanges = new LiveExchanges();
 
-async function init(exchange: string, symbol: string, side: TradeSide, price: string): Promise<void> {
+async function init(
+  exchange: string,
+  symbol: string,
+  side: TradeSide,
+  price: string
+): Promise<void> {
   try {
     await initializeExchange(exchange);
     const market = await getMarket(exchange, symbol);

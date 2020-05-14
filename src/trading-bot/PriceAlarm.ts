@@ -17,21 +17,19 @@ export class PriceAlarmBot extends TradingBot {
   }
 
   handleTrade(trade: Trade): void {
-    console.log(
-      `ALARM TRADE: ${trade.side} => ${trade.price} ${trade.amount}`
-    );
+    console.log(`ALARM TRADE: ${trade.side} => ${trade.price} ${trade.amount}`);
     if (this.side === TradeSide.SELL) {
       if (trade.price < this.price) {
-        this.notify(trade)
+        this.notify(trade);
       }
     } else {
       if (trade.price > this.price) {
-        this.notify(trade)
+        this.notify(trade);
       }
     }
   }
 
   notify(trade: Trade): void {
-    console.log('PRICE ALERT', trade.price)
+    console.log('PRICE ALERT', trade.price);
   }
 }
