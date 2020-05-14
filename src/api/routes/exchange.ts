@@ -29,6 +29,7 @@ export const applyRoutes = function (
   server.route({
     method: 'GET',
     path: `${routesPath}/{exchange}`,
+    config: { auth: 'jwt' },
     handler: async (request, h) => {
       const { exchange } = request.params;
       const { result, status } = await getExchangeStatus(exchange);

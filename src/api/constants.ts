@@ -5,4 +5,5 @@ export interface ExchangesStatus {
 export const EXCHANGES_STATUS: ExchangesStatus = {
   kraken: true,
   coinbase: false,
+  coinbasepro: true,
 };
